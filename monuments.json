@@ -3,8 +3,8 @@
     "id": "mosquee-hassan-ii",
     "nom": "Mosquée Hassan II",
     "description": "Mosquée moderne, l'une des plus grandes mosquées du monde.",
-    "lat": 33.608382,
-    "lon": -7.6326,
+    "lat": 33.6043975824,
+    "lon": -7.6261974952,
     "marker": "markers/mosquee-hassan-ii",
     "image": "images/mosquee-hassan-ii.jpg",
     "distance_max_m": 500
