@@ -113,7 +113,7 @@ async function handleStart() {
       updateCompass(heading);
 
       // 2. Mettre à jour la liste directionnelle
-      updateDirectionList(all);
+      updateDirectionList(all, phoneIsRaised);
 
       // 3. Mettre à jour le statut (à plat / levé)
       updatePhoneStatus(phoneIsRaised);

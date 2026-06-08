@@ -161,9 +161,19 @@ function getAllWithBearing(heading) {
 }
 
 // ── 11. Message directionnel ─────────────────────────────────────────────────
-function getDirectionMessage(monument) {
+function getDirectionMessage(monument, phoneIsRaised = true) {
   const { nom, delta, dist } = monument;
   const distStr = dist > 1000 ? (dist/1000).toFixed(1) + ' km' : Math.round(dist) + ' m';
+  if (!phoneIsRaised) {
+    const side = delta > 0 ? 'droite' : 'gauche';
+    const degrees = Math.abs(Math.round(delta));
+    return {
+      text: nom + ' est à votre ' + side,
+      detail: 'Levez le téléphone pour confirmer l’alignement',
+      dist: distStr,
+      status: 'tilt',
+    };
+  }
   if (Math.abs(delta) <= CONFIG.THRESHOLD_DEG) {
     return { text: nom + ' est devant vous', dist: distStr, status: 'front' };
   }

@@ -75,7 +75,7 @@ function updatePhoneStatus(phoneIsRaised) {
 }
 
 // ── Liste directionnelle ──────────────────────────────────────────────────────
-function updateDirectionList(allMonuments) {
+function updateDirectionList(allMonuments, phoneIsRaised = false) {
   if (!els.directionList) return;
   if (!allMonuments || allMonuments.length === 0) {
     els.directionList.innerHTML = '<p class="no-monuments">Aucun monument à proximité</p>';
@@ -83,8 +83,8 @@ function updateDirectionList(allMonuments) {
   }
 
   els.directionList.innerHTML = allMonuments.slice(0, 6).map((m) => {
-    const msg    = getDirectionMessage(m);
-    const isInAxis = msg.status === 'front';
+    const msg    = getDirectionMessage(m, phoneIsRaised);
+    const isInAxis = phoneIsRaised && msg.status === 'front';
     const arrow  = msg.status === 'front' ? '▲' : msg.status === 'right' ? '▶' : '◀';
     return (
       '<div class="monument-item ' + (isInAxis ? 'in-axis' : '') + '">' +
