@@ -82,10 +82,33 @@ html, body {
 #ar-container {
   position: absolute; inset: 0;
   display: none;
+  background: transparent;
 }
 
 a-scene {
   position: absolute; inset: 0;
+  z-index: 2;
+}
+
+/* AR.js injecte une balise video; on la maintient visible au-dessus du fond page. */
+#ar-container video,
+#ar-container .arjs-video {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 1 !important;
+  background: transparent !important;
+}
+
+#ar-container canvas,
+#ar-container .a-canvas,
+#ar-container .arjs-canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  background: transparent !important;
 }
 
 /* ─────────────────────────────────────────────

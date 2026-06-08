@@ -10,40 +10,54 @@
 
   <!-- A-Frame 1.6 -->
   <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
-  <!-- AR.js NFT (image tracking) -->
+  <!-- AR.js avec NFT + Location Based -->
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 </head>
 
 <body>
 
-  <!-- ═══════════════════════════════════════
-       ÉCRAN DE DÉMARRAGE — affiché en premier
-       La scène A-Frame n'est PAS encore dans le DOM.
-       Elle sera injectée dynamiquement au clic.
+  <!-- ═══════════════════════════════════════════
+       ÉCRAN DE DÉMARRAGE
   ════════════════════════════════════════════ -->
   <div id="start-screen">
     <h1>Monument <span>AR</span></h1>
     <p>Identifiez les monuments autour de vous grâce à la boussole et à la caméra.</p>
+
     <div class="start-badges">
       <span class="badge">🧭 Boussole</span>
       <span class="badge">📍 GPS</span>
       <span class="badge">📷 NFT Tracking</span>
     </div>
+
     <button id="start-btn">Démarrer</button>
-    <p style="font-size:0.75rem;color:#475569;max-width:280px;line-height:1.5">
+    <p style="font-size:0.75rem;color:#475569;max-width:280px">
       L'application demandera l'accès à votre caméra, votre position et votre boussole.
     </p>
   </div>
 
-  <!-- ═══════════════════════════════════════
-       CONTENEUR AR — vide au départ.
-       La scène A-Frame y est injectée par app.js
-       APRÈS que l'utilisateur a cliqué sur Démarrer.
+  <!-- ═══════════════════════════════════════════
+       CONTENEUR AR
   ════════════════════════════════════════════ -->
-  <div id="ar-container" style="display:none; position:absolute; inset:0;">
+  <div id="ar-container">
 
-    <!-- ── HUD en haut ─────────────────────── -->
+    <!-- ── Scène A-Frame ────────────────────────
+         arjs="trackingMethod: best" utilise NFT
+         Les entités <a-nft> sont injectées dynamiquement
+         par nft-manager.js selon les candidats
+    ──────────────────────────────────────────── -->
+    <a-scene
+      vr-mode-ui="enabled: false"
+      renderer="logarithmicDepthBuffer: true; antialias: true; alpha: true"
+      embedded
+      arjs="trackingMethod: best; sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
+    >
+      <!-- Caméra AR (pas gps-camera : on gère le GPS nous-mêmes) -->
+      <a-entity camera></a-entity>
+    </a-scene>
+
+    <!-- ── HUD en haut ──────────────────────── -->
     <div id="hud-top">
+      <!-- Boussole visuelle -->
       <div id="compass-widget">
         <div id="compass-ring">
           <span class="compass-label-n">N</span>
@@ -51,35 +65,45 @@
         </div>
         <span id="compass-deg">--°</span>
       </div>
+
+      <!-- Statuts -->
       <div id="hud-status">
         <span id="phone-status">🧭 Guidage boussole</span>
         <span id="gps-accuracy">GPS…</span>
       </div>
     </div>
 
-    <!-- ── Panneau directionnel en bas ────── -->
+    <!-- ── Panneau directionnel en bas ─────── -->
     <div id="direction-panel">
-      <div id="direction-list"></div>
+      <div id="direction-list">
+        <!-- Rempli dynamiquement par ui.js -->
+      </div>
     </div>
 
-    <!-- ── Panneau monument détecté ──────── -->
+    <!-- ── Panneau monument détecté ─────────── -->
     <div id="detected-panel">
       <h2 id="detected-name"></h2>
       <p id="detected-desc"></p>
       <button id="detected-close">Fermer</button>
     </div>
 
-    <!-- ── Loader AR.js ───────────────────── -->
+    <!-- ── Loader ────────────────────────────── -->
     <div id="loader">
       <div class="loader-spinner"></div>
       <span id="loader-text">Initialisation…</span>
     </div>
 
-    <!-- ── Toast erreur ───────────────────── -->
-    <div id="error-toast"><span id="error-text"></span></div>
+    <!-- ── Toast d'erreur ────────────────────── -->
+    <div id="error-toast">
+      <span id="error-text"></span>
+    </div>
 
-  </div>
+  </div><!-- /ar-container -->
 
+  <!-- ═══════════════════════════════════════════
+       APPLICATION (module ES6)
+  ════════════════════════════════════════════ -->
   <script type="module" src="js/app.js"></script>
+
 </body>
 </html>
