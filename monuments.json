@@ -1,0 +1,22 @@
+[
+  {
+    "id": "mosquee-hassan-ii",
+    "nom": "Mosquée Hassan II",
+    "description": "Mosquée moderne, l'une des plus grandes mosquées du monde.",
+    "lat": 33.608382,
+    "lon": -7.6326,
+    "marker": "markers/mosquee-hassan-ii",
+    "image": "images/mosquee-hassan-ii.jpg",
+    "distance_max_m": 500
+  },
+  {
+    "id": "twin-center",
+    "nom": "Twin Center",
+    "description": "Cathédrale gothique du XIIe siècle sur l'Île de la Cité.",
+    "lat": 33.5333312,
+    "lon": -7.583331,
+    "marker": "markers/twin-center",
+    "image": "images/twin-center.jpg",
+    "distance_max_m": 800
+  }
+]
