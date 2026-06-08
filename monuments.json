@@ -7,7 +7,7 @@
     "lon": -7.6261974952,
     "marker": "markers/mosquee-hassan-ii",
     "image": "images/mosquee-hassan-ii.jpg",
-    "distance_max_m": 500
+    "distance_max_m": 2000
   },
   {
     "id": "twin-center",
@@ -17,6 +17,6 @@
     "lon": -7.583331,
     "marker": "markers/twin-center",
     "image": "images/twin-center.jpg",
-    "distance_max_m": 800
+    "distance_max_m": 2000
   }
 ]
